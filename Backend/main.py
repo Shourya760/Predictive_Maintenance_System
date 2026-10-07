@@ -22,7 +22,7 @@ app.add_middleware( CORSMiddleware,
 )
 
 # Load Trained ML Model
-model = joblib.load("Backend/maintenance_model.pkl")
+model = joblib.load("maintenance_model.pkl")
 # Feature Names
 # Must match the model's training features
 
