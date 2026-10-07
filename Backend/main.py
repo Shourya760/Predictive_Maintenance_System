@@ -4,7 +4,7 @@ import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Backend.controller import SensorData, PredictionResponse
+from controller import SensorData, PredictionResponse
 
 
 # FastAPI
