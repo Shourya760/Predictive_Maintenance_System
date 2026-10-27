@@ -192,7 +192,7 @@ function MachineForm() {
         </div>
 
         {/* Result */}
-        <Result result={result} />
+        <Result result={result} loading={loading} />
 
       </div>
     </section>

@@ -1,31 +1,3 @@
-function Result({ result }) {
-  return (
-    <aside aria-live="polite" className="flex min-h-0 flex-col overflow-hidden bg-slate-50">
-      {!result ? (
-        <EmptyResult />
-      ) : result.error ? (
-        <div className="p-5 text-red-800">
-          <h2 className="font-bold">Prediction unavailable</h2>
-          <p className="mt-1 text-sm">{result.error}</p>
-        </div>
-      ) : (
-        <ResultDetails result={result} />
-      )}
-    </aside>
-  );
-}
-
-function EmptyResult() {
-  return (
-    <div className="flex h-full flex-col justify-center p-6 text-center">
-      <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-teal-50 text-2xl">⌁</div>
-      <h2 className="mt-4 text-lg font-bold">Your result will appear here</h2>
-      <p className="mt-2 text-sm text-slate-500">
-        Complete all three steps and run a prediction to see risk and suggested actions.
-      </p>
-    </div>
-  );
-}
 
 function ResultDetails({ result }) {
   const failure = result.prediction === 1;
@@ -87,6 +59,66 @@ function ResultList({ title, empty, items, render }) {
       ) : (
         <p className="mt-1 text-sm text-slate-500">{empty}</p>
       )}
+    </div>
+  );
+}
+
+
+
+function LoadingResult() {
+  return (
+    <div className="flex h-full flex-col items-center justify-center p-6 text-center">
+      {/* Animated Gear */}
+      <div className="text-6xl animate-spin">⚙️</div>
+
+      <h2 className="mt-4 text-xl font-bold text-teal-700">
+        Diagnosing Machine...
+      </h2>
+
+      <p className="mt-2 text-sm text-slate-500">
+        Analyzing sensors and checking machine health
+      </p>
+
+      {/* Scanning Bar */}
+      <div className="mt-6 h-2 w-56 overflow-hidden rounded-full bg-slate-200">
+        <div className="h-full w-1/2 animate-pulse rounded-full bg-teal-600" />
+      </div>
+
+      <p className="mt-3 animate-pulse text-xs text-teal-600">
+        ● SYSTEM ANALYSIS IN PROGRESS
+      </p>
+    </div>
+  );
+}
+
+
+function Result({ result, loading }) {
+  return (
+    <aside aria-live="polite" className="flex min-h-0 flex-col overflow-hidden bg-slate-50">
+      {loading ? (
+        <LoadingResult />
+      ) : !result ? (
+        <EmptyResult />
+      ) : result.error ? (
+        <div className="p-5 text-red-800">
+          <h2 className="font-bold">Prediction unavailable</h2>
+          <p className="mt-1 text-sm">{result.error}</p>
+        </div>
+      ) : (
+        <ResultDetails result={result} />
+      )}
+    </aside>
+  );
+}
+
+function EmptyResult() {
+  return (
+    <div className="flex h-full flex-col justify-center p-6 text-center">
+      <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-teal-50 text-2xl">⌁</div>
+      <h2 className="mt-4 text-lg font-bold">Your result will appear here</h2>
+      <p className="mt-2 text-sm text-slate-500">
+        Complete all three steps and run a prediction to see risk and suggested actions.
+      </p>
     </div>
   );
 }
